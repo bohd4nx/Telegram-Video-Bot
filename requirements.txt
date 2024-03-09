@@ -1,0 +1,3 @@
+python-telegram-bot
+moviepy
+python-telegram-bot==20.0a0
