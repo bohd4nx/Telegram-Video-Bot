@@ -23,8 +23,8 @@ This project is a Telegram bot designed to convert videos into video messages. I
    
 3. **Set up a Telegram Bot:**
    - Talk to the BotFather on Telegram to create a new bot and obtain the API token.
-   - Copy the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L6) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
-   - Additionally, make sure to replace [`@username`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/handlers.py#L15) in the code with the actual administrator's username.
+   - Copy the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L7) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
+   - Additionally, make sure to replace [`@username`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/commands.py#L12) in the code with the actual administrator's username.
    
 3. **Run the Bot:**
      ```
