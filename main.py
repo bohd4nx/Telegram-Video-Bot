@@ -1,7 +1,8 @@
 import logging
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
-from handlers import start, help, process_video
+from handlers import process_video
+from commands import start, help
 
 TOKEN = ""  # Replace with your token
 
