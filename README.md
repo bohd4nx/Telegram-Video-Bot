@@ -42,7 +42,7 @@ We welcome all forks, suggestions, and improvements to this project. Your contri
 
 ### ❤️ Show your support:
 
-Give a ⭐ if you like this website!
+Give a ⭐ if you like this repo!
 
 <a href="https://www.buymeacoffee.com/bohd4n" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="Buy Me A Coffee" height= "50px" width= "200px" ></a>
 
