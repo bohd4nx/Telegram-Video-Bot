@@ -8,15 +8,21 @@ This project is a Telegram bot designed to convert videos into video messages. I
     <a href="https://github.com/7GitGuru/Telegram-Video-Bot/issues">Request Feature</a>
 </h3>
 
+---
+<h3 align="center">
+    
 [![GitHub license](https://img.shields.io/github/license/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/LICENSE)
 [![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 [![GitHub commits](https://badgen.net/github/commits/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 [![GitHub stars](https://badgen.net/github/stars/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 
-<!--- [![GitHub release](https://img.shields.io/github/release/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/releases/) 
-      [![GitHub watchers](https://badgen.net/github/watchers/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot//watchers/) -->
+<!--- 
+[![GitHub release](https://img.shields.io/github/release/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/releases/) 
+[![GitHub watchers](https://badgen.net/github/watchers/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot//watchers/) 
+-->
 
----
+</h3>
+
 
 ### 👨‍💻Installation:
 1. **Clone the repository:**
