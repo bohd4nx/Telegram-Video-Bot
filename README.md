@@ -10,7 +10,7 @@ This project is a Telegram bot designed to convert videos into video messages. I
 
 ---
 <h3 align="center">
-    
+
 [![GitHub license](https://img.shields.io/github/license/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/LICENSE)
 [![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 [![GitHub commits](https://badgen.net/github/commits/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
@@ -34,21 +34,22 @@ This project is a Telegram bot designed to convert videos into video messages. I
    ```
    pip install -r requirements.txt
    ```
-   
+
 3. **Set up a Telegram Bot:**
    - Talk to the BotFather on Telegram to create a new bot and obtain the API token.
-   - Copy the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L7) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
+   - Insert the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L7) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
    - Additionally, make sure to replace [`@username`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/commands.py#L12) in the code with the actual administrator's username.
-   
-3. **Run the Bot:**
+
+4. **Run the Bot:**
      ```
      python main.py
      ``` 
+### [DEMO Videos](https://github.com/7GitGuru/Telegram-Video-Bot/tree/main/DEMO)
+
 
 ### 📃 ToDo List:
 - [x] Refactor Code (Check the code for possible improvements and optimizations.)
-- [ ] Localization (Full language localization for multi-language support.)
-- [ ] Feature Expansion
+- [x] Localization
 
 ### ❗Contributions Welcome!
 
