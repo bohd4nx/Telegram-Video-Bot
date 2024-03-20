@@ -44,7 +44,7 @@ This project is a Telegram bot designed to convert videos into video messages. I
      ```
      python main.py
      ``` 
-### [DEMO Videos](https://github.com/7GitGuru/Telegram-Video-Bot/tree/main/DEMO)
+### [DEMO Video](https://github.com/7GitGuru/Telegram-Video-Bot/tree/main/DEMO)
 
 
 ### 📃 ToDo List:
