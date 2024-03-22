@@ -12,13 +12,13 @@ This project is a Telegram bot designed to convert videos into video messages. I
 <h3 align="center">
 
 [![GitHub license](https://img.shields.io/github/license/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/LICENSE)
-[![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 [![GitHub commits](https://badgen.net/github/commits/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 [![GitHub stars](https://badgen.net/github/stars/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 
 <!--- 
 [![GitHub release](https://img.shields.io/github/release/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/releases/) 
 [![GitHub watchers](https://badgen.net/github/watchers/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot//watchers/) 
+[![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
 -->
 
 </h3>
@@ -37,8 +37,8 @@ This project is a Telegram bot designed to convert videos into video messages. I
 
 3. **Set up a Telegram Bot:**
    - Talk to the BotFather on Telegram to create a new bot and obtain the API token.
-   - Insert the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L7) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
-   - Additionally, make sure to replace [`@username`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/commands.py#L12) in the code with the actual administrator's username.
+   - Insert the API token into the [`TOKEN`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py#L9) variable in the [`main.py`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/main.py) file.
+   - Additionally, make sure to replace [`@username`](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/bot/commands.py#L14) in the code with the actual administrator's username.
 
 4. **Run the Bot:**
      ```
