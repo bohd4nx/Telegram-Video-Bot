@@ -43,13 +43,9 @@ This project is a Telegram bot designed to convert videos into video messages. I
 4. **Run the Bot:**
      ```
      python main.py
-     ``` 
+     ```
+
 ### [DEMO Video](https://github.com/7GitGuru/Telegram-Video-Bot/tree/main/DEMO)
-
-
-### 📃 ToDo List:
-- [x] Refactor Code (Check the code for possible improvements and optimizations.)
-- [x] Localization
 
 ### ❗Contributions Welcome!
 
