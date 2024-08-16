@@ -11,14 +11,14 @@ This project is a Telegram bot designed to convert videos into video messages. I
 ---
 <h3 align="center">
 
-[![GitHub license](https://img.shields.io/github/license/bohd4nx/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/blob/main/LICENSE)
-[![GitHub commits](https://badgen.net/github/commits/bohd4nx/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
-[![GitHub stars](https://badgen.net/github/stars/bohd4nx/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
+[![GitHub license](https://img.shields.io/github/license/bohd4nx/Telegram-Video-Bot.svg)](https://github.com/bohd4nx/Telegram-Video-Bot/blob/main/LICENSE)
+[![GitHub commits](https://badgen.net/github/commits/bohd4nx/Telegram-Video-Bot)](https://github.com/bohd4nx/Telegram-Video-Bot/)
+[![GitHub stars](https://badgen.net/github/stars/bohd4nx/Telegram-Video-Bot)](https://github.com/bohd4nx/Telegram-Video-Bot/)
 
 <!--- 
-[![GitHub release](https://img.shields.io/github/release/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/7GitGuru/Telegram-Video-Bot/releases/) 
-[![GitHub watchers](https://badgen.net/github/watchers/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot//watchers/) 
-[![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/7GitGuru/Telegram-Video-Bot/)
+[![GitHub release](https://img.shields.io/github/release/7GitGuru/Telegram-Video-Bot.svg)](https://github.com/bohd4nx/Telegram-Video-Bot/releases/) 
+[![GitHub watchers](https://badgen.net/github/watchers/7GitGuru/Telegram-Video-Bot)](https://github.com/bohd4nx/Telegram-Video-Bot//watchers/) 
+[![GitHub branches](https://badgen.net/github/branches/7GitGuru/Telegram-Video-Bot)](https://github.com/bohd4nx/Telegram-Video-Bot/)
 -->
 
 </h3>
