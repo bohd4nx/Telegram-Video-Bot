@@ -44,8 +44,7 @@ This project is a Telegram bot designed to convert videos into video messages. I
 
 ### DEMO
 
-https://github.com/user-attachments/assets/0e325bc9-8ac7-41ed-a35a-64d4c8c7f072
-
+https://github.com/user-attachments/assets/a796e67b-a66b-4a15-ada5-e9d928baadfb
 
 
 ### ❗Contributions Welcome!
