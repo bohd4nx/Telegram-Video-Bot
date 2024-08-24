@@ -1,52 +1,78 @@
-# handlers.py
 import os
-
 from moviepy.editor import VideoFileClip
-from telegram import Update
-from telegram.ext import CallbackContext
+from aiogram.utils.exceptions import FileIsTooBig
+from aiogram import types
+from aiogram.types import InputFile
+from cfg import STICKER, ADMIN_ID
+from data.database import error, usage
+from datetime import datetime
 
 
-async def process_video(update: Update, context: CallbackContext):
-    processing_message = await update.message.reply_text("❗️Processing...")
+async def video(message: types.Message):
+    bot = message.bot
+    user_id = message.from_user.id
+    username = message.from_user.username or "None"
+    current_time = datetime.now().strftime("%H-%M-%S-%f")
 
-    video_file = await context.bot.get_file(update.message.video.file_id)
+    try:
+        file_id = message.video.file_id
+        file = await bot.get_file(file_id)
 
-    # Creating 'temp' folder if it doesn't exist
-    temp_folder = "temp"
-    if not os.path.exists(temp_folder):
-        os.makedirs(temp_folder)
+        # Check file size
+        # if file.file_size > 20 * 1024 * 1024:  # 20 MB limit
+        #     await message.reply("⚠️ The file is too large.\nPlease send a file smaller than 20 MB.")
+        #     return
 
-    input_video_path = os.path.join(temp_folder, "input_video.mp4")
-    output_video_path = os.path.join(temp_folder, "output_video.mp4")
+        processing_message = await message.reply_sticker(sticker=STICKER)
 
-    await video_file.download(input_video_path)
+        # Create 'cache' directory if it doesn't exist
+        temp_folder = "cache"
+        os.makedirs(temp_folder, exist_ok=True)
 
-    # Convert
-    input_video = VideoFileClip(input_video_path)
-    w, h = input_video.size
-    circle_size = 360
-    aspect_ratio = float(w) / float(h)
+        input_path = os.path.join(temp_folder, f"[{user_id}]_({current_time})_video.mp4")
+        output_path = os.path.join(temp_folder, f"[{user_id}]_({current_time})_output_video.mp4")
 
-    if w > h:
-        new_w = int(circle_size * aspect_ratio)
-        new_h = circle_size
-    else:
-        new_w = circle_size
-        new_h = int(circle_size / aspect_ratio)
+        # Download video
+        await bot.download_file(file.file_path, input_path)
 
-    resized_video = input_video.resize((new_w, new_h))
-    output_video = resized_video.crop(x_center=resized_video.w / 2, y_center=resized_video.h / 2, width=circle_size,
-                                      height=circle_size)
-    output_video.write_videofile(output_video_path, codec="libx264", audio_codec="aac", bitrate="5M")
+        # Convert video
+        input_video = VideoFileClip(input_path)
+        w, h = input_video.size
+        circle_size = 360
+        aspect_ratio = float(w) / float(h)
 
-    # Send
-    with open(output_video_path, "rb") as video:
-        await context.bot.send_video_note(chat_id=update.message.chat_id, video_note=video,
-                                          duration=int(output_video.duration), length=circle_size)
+        if w > h:
+            new_w = int(circle_size * aspect_ratio)
+            new_h = circle_size
+        else:
+            new_w = circle_size
+            new_h = int(circle_size / aspect_ratio)
 
-    # Delete
-    os.remove(input_video_path)
-    os.remove(output_video_path)
+        resized_video = input_video.resize((new_w, new_h))
+        output_video = resized_video.crop(
+            x_center=resized_video.w / 2,
+            y_center=resized_video.h / 2,
+            width=circle_size,
+            height=circle_size
+        )
+        output_video.write_videofile(output_path, codec="libx264", audio_codec="aac", bitrate="5M")
 
-    # Delete message
-    await processing_message.delete()
+        # Send video message
+        video_note = InputFile(output_path, filename=f"{user_id}_{current_time}_output_video.mp4")
+        await bot.send_video_note(chat_id=message.chat.id, video_note=video_note, duration=int(output_video.duration),
+                                  length=circle_size)
+
+        usage(user_id)
+
+        # Cleanup
+        os.remove(input_path)
+        os.remove(output_path)
+
+        # Delete processing message
+        await processing_message.delete()
+
+    except FileIsTooBig:
+        await message.reply("⚠️ The file is too large.\nPlease send a file smaller than 20 MB.")
+    except Exception as e:
+        await message.reply("❌ An error occurred during processing. Please contact the developer.")
+        error(user_id, username, str(e))

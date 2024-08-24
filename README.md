@@ -35,17 +35,18 @@ This project is a Telegram bot designed to convert videos into video messages. I
    pip install -r requirements.txt
    ```
 
-3. **Set up a Telegram Bot:**
-   - Talk to the BotFather on Telegram to create a new bot and obtain the API token.
-   - Insert the API token into the [`TOKEN`](https://github.com/bohd4nx/Telegram-Video-Bot/blob/main/main.py#L9) variable in the [`main.py`](https://github.com/bohd4nx/Telegram-Video-Bot/blob/main/main.py) file.
-   - Additionally, make sure to replace [`@username`](https://github.com/bohd4nx/Telegram-Video-Bot/blob/main/bot/commands.py#L12) in the code with the actual administrator's username.
+3. Set Up Configuration
 
 4. **Run the Bot:**
      ```
      python main.py
      ```
 
-### [DEMO Video](https://github.com/bohd4nx/Telegram-Video-Bot/tree/main/DEMO)
+### DEMO
+
+https://github.com/user-attachments/assets/0e325bc9-8ac7-41ed-a35a-64d4c8c7f072
+
+
 
 ### ❗Contributions Welcome!
 

@@ -1,2 +1,2 @@
-python-telegram-bot
+aiogram~=2.25.1
 moviepy~=1.0.3
