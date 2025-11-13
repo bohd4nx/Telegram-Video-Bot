@@ -29,13 +29,12 @@ async def main():
             core=FluentRuntimeCore(path="locales/{locale}"),
             default_locale="en"
         )
-        
+
         register_start_handlers(dp)
         register_help_handlers(dp)
         register_video_handlers(dp)
-        
-        i18n_middleware.setup(dispatcher=dp)
 
+        i18n_middleware.setup(dispatcher=dp)
 
         commands = [
             types.BotCommand(command="start", description="🚀 Start the app"),
