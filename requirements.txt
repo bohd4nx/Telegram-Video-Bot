@@ -1,5 +1,6 @@
 aiogram==3.22.0
 python-dotenv==1.2.1
-opencv-python==4.12.0.88
-numpy>=2.0.0,<2.3.0  # opencv-python 4.12.0.88 depends on numpy<2.3.0 and >=2; python_version >= "3.9"
-asyncio==4.0.0
+ffmpeg-python==0.2.0
+fluent-runtime==0.4.0
+aiogram_i18n==1.4
+fluent_compiler==1.1
