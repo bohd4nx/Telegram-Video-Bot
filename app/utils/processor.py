@@ -13,10 +13,10 @@ async def process_video(message, i18n):
     proc_msg = await message.reply(i18n.get("processing-text"))
 
     in_path = None
-    overlay_path = Path(__file__).parent / "plane.mov"  # currently using a video overlay
+    overlay_path = Path(__file__).parent.parent.parent / "files" / "overlay.mov"
     segment_paths = []
 
-    # TODO: # replace built-in overlay, create mine, identical to Telegram’s (with transparent background)
+    # TODO: # replace built-in overlay, create mine, identical to Telegram's (with transparent background)
 
     try:
         file = await message.bot.get_file(message.video.file_id)

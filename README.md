@@ -1,10 +1,20 @@
-# 🎥 Telegram Video Circle Bot
-
 <div align="center">
+  <img src="files/logo.svg" alt="Bot Logo" width="120"
+  height="120" style="border-radius: 24px;">
 
-_Transforms regular videos into circular video notes (**as in telegram**)_
+  <h1 style="margin-top: 24px;">🎥 Telegram Video Bot</h1>
 
-[Report Bug](https://github.com/bohd4nx/Telegram-Video-Bot/issues) · [Request Feature](https://github.com/bohd4nx/Telegram-Video-Bot/issues)
+  <p style="font-size: 18px; color: #666; margin-bottom: 24px;">
+    <strong>Transform regular videos into perfect circular video notes</strong>
+  </p>
+
+  <p>
+    <a href="https://github.com/bohd4nx/Telegram-Video-Bot/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/bohd4nx/Telegram-Video-Bot/issues">Request Feature</a>
+    ·
+    <a href="https://t.me/bohd4nx">Try Demo</a>
+  </p>
 
 </div>
 
