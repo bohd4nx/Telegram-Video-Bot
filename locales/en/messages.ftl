@@ -27,7 +27,7 @@ voice-messages-disabled-text = 🔒 <b>Voice Messages Disabled</b>
     3️⃣ Choose <b>Voice Messages</b>
     4️⃣ Set to <b>"Everyone"</b>
 
-Then send your video again!
+    Then send your video again!
 
 start-text = 👋 <b>Hello, {$name}!</b>
 
