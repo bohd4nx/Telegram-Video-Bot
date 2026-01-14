@@ -3,7 +3,7 @@ help-text = 📝 <b>Video Requirements:</b>
     • <b>Format:</b> Square (optimal), otherwise will be cropped
     • <b>Quality:</b> 480p (optimal for faster processing)
     • <b>Duration:</b> Maximum 60 seconds
-    • <b>Size:</b> Up to 20 MB
+    • <b>Size:</b> Up to 50 MB
 
     📱 <b>How to Share Video Message:</b>
 

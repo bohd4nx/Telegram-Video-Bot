@@ -1,36 +1,34 @@
 import tempfile
-from datetime import datetime
 from pathlib import Path
 
 import ffmpeg
+from aiogram import Bot
 from aiogram.exceptions import TelegramEntityTooLarge, TelegramForbiddenError
-from aiogram.types import FSInputFile
+from aiogram.types import FSInputFile, Message
+from aiogram_i18n import I18nContext
 
 
-async def process_video(message, i18n):
-    user_id = message.from_user.id
-    time_str = datetime.now().strftime("%H-%M-%S-%f")
+async def process_video(message: Message, i18n: I18nContext, bot: Bot):
     proc_msg = await message.reply(i18n.get("processing-text"))
 
     in_path = None
-    overlay_path = Path(__file__).parent.parent.parent / "files" / "overlay.mov"
+    overlay_path = Path(__file__).resolve().parents[2] / "files" / "overlay.mov"
     segment_paths = []
 
     # TODO: # replace built-in overlay, create mine, identical to Telegram's (with transparent background)
 
     try:
-        file = await message.bot.get_file(message.video.file_id)
+        file = await bot.get_file(message.video.file_id)
 
         with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as temp_file:
             in_path = Path(temp_file.name)
 
-        await message.bot.download_file(file.file_path, in_path)
+        await bot.download_file(file.file_path, in_path)
 
         probe_input = ffmpeg.probe(str(in_path))
         total_duration = float(probe_input["format"]["duration"])
 
         current_time = 0
-        segment_num = 1
 
         while current_time < total_duration:
             segment_duration = min(60.0, total_duration - current_time)
@@ -70,12 +68,11 @@ async def process_video(message, i18n):
             segment_paths.append((output_path, actual_duration, 640))
 
             current_time += 60
-            segment_num += 1
 
-        for idx, (seg_path, duration, size) in enumerate(segment_paths, 1):
-            await message.bot.send_video_note(
+        for seg_path, duration, size in segment_paths:
+            await bot.send_video_note(
                 chat_id=message.chat.id,
-                video_note=FSInputFile(seg_path, filename=f"{user_id}_{time_str}_segment_{idx:03d}.mp4"),
+                video_note=FSInputFile(seg_path),
                 duration=duration,
                 length=size
             )

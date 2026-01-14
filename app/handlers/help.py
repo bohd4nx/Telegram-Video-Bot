@@ -1,11 +1,12 @@
-from aiogram import types, Dispatcher
+from aiogram import Router
 from aiogram.filters import Command
+from aiogram.types import Message
+from aiogram_i18n import I18nContext
+
+router = Router(name=__name__)
 
 
-async def help_command(message: types.Message, i18n):
+@router.message(Command("help"))
+async def help_command(message: Message, i18n: I18nContext):
     await message.delete()
     await message.answer(i18n.get("help-text"))
-
-
-def register_help_handlers(dp: Dispatcher):
-    dp.message.register(help_command, Command("help"))

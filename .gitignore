@@ -6,7 +6,7 @@ __pycache__/
 .Python
 
 # Virtual environments
-./.venv
+.venv/
 venv/
 
 # IDE
@@ -20,3 +20,12 @@ venv/
 # System files
 .DS_Store
 Thumbs.db
+
+# Files and folders 
+logs/
+*.log
+downloads/
+temp/
+temp_*/
+output/
+files/plane_*.mov

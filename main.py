@@ -1,26 +1,20 @@
 import asyncio
-import logging
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 
-from app.core.config import config
-from app.handlers.help import register_help_handlers
-from app.handlers.start import register_start_handlers
-from app.handlers.video import register_video_handlers
-
-logging.basicConfig(level=logging.ERROR, format='[%(asctime)s] - %(levelname)s: %(message)s', datefmt='%H:%M:%S')
-logging.getLogger('aiogram.dispatcher').setLevel(logging.INFO)
-logger = logging.getLogger(__name__)
+from app.core import config, logger, setup_logging
+from app.handlers import help_router, start_router, video_router
 
 
 async def main():
+    setup_logging()
+    
     bot = Bot(token=config.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-    dp = Dispatcher(storage=MemoryStorage())
+    dp = Dispatcher()
 
     try:
         logger.info("Starting Telegram Video Bot...")
@@ -29,12 +23,9 @@ async def main():
             core=FluentRuntimeCore(path="locales/{locale}"),
             default_locale="en"
         )
-
-        register_start_handlers(dp)
-        register_help_handlers(dp)
-        register_video_handlers(dp)
-
         i18n_middleware.setup(dispatcher=dp)
+
+        dp.include_routers(start_router, help_router, video_router)
 
         commands = [
             types.BotCommand(command="start", description="🚀 Start the app"),
@@ -42,13 +33,14 @@ async def main():
         ]
         await bot.set_my_commands(commands)
 
-        await dp.start_polling(bot)
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
     except KeyboardInterrupt:
         logger.info("Received interrupt signal")
     except Exception as e:
         logger.error(f"Application error: {e}")
     finally:
         await bot.session.close()
+        logger.info("Bot stopped")
 
 
 if __name__ == "__main__":

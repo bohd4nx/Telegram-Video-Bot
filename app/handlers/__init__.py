@@ -1,9 +1,9 @@
-from app.handlers.help import register_help_handlers
-from app.handlers.start import register_start_handlers
-from app.handlers.video import register_video_handlers
+from app.handlers.help import router as help_router
+from app.handlers.start import router as start_router
+from app.handlers.video import router as video_router
 
 __all__ = [
-    'register_start_handlers',
-    'register_help_handlers',
-    'register_video_handlers'
+    'start_router',
+    'help_router',
+    'video_router'
 ]

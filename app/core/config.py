@@ -16,7 +16,7 @@ class Config:
 
     @staticmethod
     def _load_config() -> None:
-        env_path = Path(__file__).parent.parent.parent / '.env'
+        env_path = Path(__file__).resolve().parents[2] / ".env"
         try:
             load_dotenv(env_path)
         except Exception:
