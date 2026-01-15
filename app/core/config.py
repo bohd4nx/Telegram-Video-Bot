@@ -9,7 +9,9 @@ logger = logging.getLogger(__name__)
 
 
 class Config:
-    def __init__(self):
+    BOT_TOKEN: str
+
+    def __init__(self) -> None:
         self._load_config()
         self._setup_properties()
         self._validate_config()
@@ -17,11 +19,10 @@ class Config:
     @staticmethod
     def _load_config() -> None:
         env_path = Path(__file__).resolve().parents[2] / ".env"
-        try:
-            load_dotenv(env_path)
-        except Exception:
-            logger.error("Failed to load .env file")
+        if not env_path.exists():
+            logger.error("Missing .env file")
             sys.exit(1)
+        load_dotenv(env_path)
 
     def _setup_properties(self) -> None:
         self.BOT_TOKEN = os.getenv('BOT_TOKEN', '').strip()

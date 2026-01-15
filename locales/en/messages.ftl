@@ -3,7 +3,7 @@ help-text = 📝 <b>Video Requirements:</b>
     • <b>Format:</b> Square (optimal), otherwise will be cropped
     • <b>Quality:</b> 480p (optimal for faster processing)
     • <b>Duration:</b> Maximum 60 seconds
-    • <b>Size:</b> Up to 50 MB
+    • <b>Size:</b> Up to 20 MB
 
     📱 <b>How to Share Video Message:</b>
 
@@ -40,13 +40,21 @@ start-text = 👋 <b>Hello, {$name}!</b>
 
 processing-text = ⏳ <b>Video is being processed</b>
     
-    ℹ️ Usually takes <code>≤ 15s</code> if all rules are followed...
+    ℹ️ Usually takes 5-10 seconds if all rules are followed...
 
 unknown-input-text = ❓ Please send a video file or use these commands:
 
     /start - Begin using the bot  
     /help - View instructions
 
-processing-error-text = ❌ Processing error: {$error}
+processing-error-text = ❌ <b>Processing error:</b> {$error}
 
-file-too-large-text = ⚠️ File too large (maximum 20MB)
+file-too-large-text = ⚠️ <b>File too large:</b> {$size} MB
+
+    📌 <b>Maximum size:</b> 20 MB
+
+    💡 <b>How to compress:</b>
+    • Use lower resolution (720p or 480p)
+    • Reduce video bitrate
+    • Trim unnecessary parts
+    • Use online compressor (e.g., VideoSmaller)

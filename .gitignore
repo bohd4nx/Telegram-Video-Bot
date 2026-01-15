@@ -28,4 +28,7 @@ downloads/
 temp/
 temp_*/
 output/
-files/plane_*.mov
+files/telegram.png
+files/plane.json
+files/circle.png
+files/hole.png

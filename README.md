@@ -13,7 +13,7 @@
     ·
     <a href="https://github.com/bohd4nx/Telegram-Video-Bot/issues">Request Feature</a>
     ·
-    <a href="https://t.me/bohd4nx">Try Demo</a>
+    <a href="https://t.me/RoundMsgBot">Try Demo</a>
   </p>
 
 </div>

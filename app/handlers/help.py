@@ -7,6 +7,6 @@ router = Router(name=__name__)
 
 
 @router.message(Command("help"))
-async def help_command(message: Message, i18n: I18nContext):
+async def help_command(message: Message, i18n: I18nContext) -> None:
     await message.delete()
     await message.answer(i18n.get("help-text"))

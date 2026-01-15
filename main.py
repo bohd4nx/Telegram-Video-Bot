@@ -1,8 +1,9 @@
 import asyncio
 
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.types import BotCommand
 from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 
@@ -10,7 +11,7 @@ from app.core import config, logger, setup_logging
 from app.handlers import help_router, start_router, video_router
 
 
-async def main():
+async def main() -> None:
     setup_logging()
     
     bot = Bot(token=config.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -28,8 +29,8 @@ async def main():
         dp.include_routers(start_router, help_router, video_router)
 
         commands = [
-            types.BotCommand(command="start", description="🚀 Start the app"),
-            types.BotCommand(command="help", description="📖 Show help information")
+            BotCommand(command="start", description="🚀 Start the app"),
+            BotCommand(command="help", description="📖 Show help information")
         ]
         await bot.set_my_commands(commands)
 
