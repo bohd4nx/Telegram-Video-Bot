@@ -7,42 +7,57 @@ from aiogram.types import BotCommand
 from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 
-from app.core import config, logger, setup_logging
-from app.handlers import help_router, start_router, video_router
+from app.commands import start_router, help_router
+from app.core import logger, setup_logging, config
+from app.handlers import video_router
 
 
 async def main() -> None:
     setup_logging()
-    
-    bot = Bot(token=config.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+
+    bot = Bot(
+        token=config.BOT_TOKEN,
+        default=DefaultBotProperties(
+            parse_mode=ParseMode.HTML,
+            link_preview_is_disabled=True
+        )
+    )
+
+    commands = [
+        BotCommand(command="start", description="🚀 Start the app"),
+        BotCommand(command="help", description="📖 Show help information")
+    ]
+    await bot.set_my_commands(commands)
+
+    i18n_core = FluentRuntimeCore(path="locales/{locale}")
+    await i18n_core.startup()
+    logger.info(f"Loaded locales: {i18n_core.available_locales}")
+    i18n = I18nMiddleware(core=i18n_core, default_locale="en")
+
     dp = Dispatcher()
 
+    for router in [start_router, help_router, video_router]:
+        dp.include_router(router)
+
+    i18n.setup(dispatcher=dp)
+
     try:
-        logger.info("Starting Telegram Video Bot...")
-
-        i18n_middleware = I18nMiddleware(
-            core=FluentRuntimeCore(path="locales/{locale}"),
-            default_locale="en"
+        await dp.start_polling(
+            bot,
+            polling_timeout=30,
+            handle_as_tasks=True,
+            tasks_concurrency_limit=100,
+            close_bot_session=True,
         )
-        i18n_middleware.setup(dispatcher=dp)
-
-        dp.include_routers(start_router, help_router, video_router)
-
-        commands = [
-            BotCommand(command="start", description="🚀 Start the app"),
-            BotCommand(command="help", description="📖 Show help information")
-        ]
-        await bot.set_my_commands(commands)
-
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
-    except KeyboardInterrupt:
-        logger.info("Received interrupt signal")
-    except Exception as e:
-        logger.error(f"Application error: {e}")
     finally:
+        await i18n.core.shutdown()
         await bot.session.close()
-        logger.info("Bot stopped")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        pass
+    except Exception as e:
+        logger.exception(f"Unexpected error: {e}")

@@ -4,6 +4,7 @@ from pathlib import Path
 
 import ffmpeg
 from aiogram import Bot
+from aiogram.enums import ChatAction
 from aiogram.exceptions import TelegramBadRequest, TelegramEntityTooLarge, TelegramForbiddenError
 from aiogram.types import FSInputFile, Message
 from aiogram_i18n import I18nContext
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 async def process_video(message: Message, i18n: I18nContext, bot: Bot) -> None:
     proc_msg = await message.reply(i18n.get("processing-text"))
+    await bot.send_chat_action(chat_id=message.chat.id, action=ChatAction.UPLOAD_VIDEO_NOTE)
     files_dir = Path(__file__).resolve().parents[2] / "files"
     in_path: Path | None = None
     segment_paths: list[tuple[Path, int, int]] = []
@@ -31,6 +33,7 @@ async def process_video(message: Message, i18n: I18nContext, bot: Bot) -> None:
         current_time = 0
 
         while current_time < total_duration:
+            await bot.send_chat_action(chat_id=message.chat.id, action=ChatAction.UPLOAD_VIDEO_NOTE)
             duration = min(60.0, total_duration - current_time)
             with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as f:
                 output_path = Path(f.name)
