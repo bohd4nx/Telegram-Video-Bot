@@ -7,9 +7,8 @@ from aiogram.types import BotCommand
 from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 
-from app.commands import start_router, help_router
 from app.core import logger, setup_logging, config
-from app.handlers import video_router
+from app.handlers import router
 
 
 async def main() -> None:
@@ -29,15 +28,14 @@ async def main() -> None:
     ]
     await bot.set_my_commands(commands)
 
-    i18n_core = FluentRuntimeCore(path="locales/{locale}")
+    i18n_core = FluentRuntimeCore(path="locales/{locale}/LC_MESSAGES")
     await i18n_core.startup()
     logger.info(f"Loaded locales: {i18n_core.available_locales}")
     i18n = I18nMiddleware(core=i18n_core, default_locale="en")
 
     dp = Dispatcher()
 
-    for router in [start_router, help_router, video_router]:
-        dp.include_router(router)
+    dp.include_router(router)
 
     i18n.setup(dispatcher=dp)
 
