@@ -15,12 +15,18 @@ class Config:
         load_dotenv(env_path)
 
         self.BOT_TOKEN: str = self._require_env("BOT_TOKEN")
+        self.ADMIN_IDS: list[int] = self._parse_admin_ids(os.getenv("ADMIN_IDS", ""))
+        self.SUPPORT_URL: str | None = os.getenv("SUPPORT_URL") or None
 
         self.POSTGRES_USER: str = self._require_env("POSTGRES_USER")
         self.POSTGRES_PASSWORD: str = self._require_env("POSTGRES_PASSWORD")
         self.POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "db")
         self.POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
         self.POSTGRES_DB: str = self._require_env("POSTGRES_DB")
+
+    @staticmethod
+    def _parse_admin_ids(raw: str) -> list[int]:
+        return [int(x) for x in raw.split(",") if x.strip().isdigit()]
 
     @staticmethod
     def _require_env(name: str) -> str:
@@ -33,4 +39,3 @@ class Config:
 
 
 config = Config()
-

@@ -8,7 +8,7 @@ from aiogram.types import CallbackQuery, Message
 from aiogram_i18n import I18nContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.database import DownloadCreate, add_download
+from app.database.download import DownloadCreate, add_download
 from app.services import process_and_send
 
 from .states import LinkState

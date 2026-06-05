@@ -28,7 +28,6 @@ async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
 
     @dp.startup()
     async def on_startup() -> None:
-        # await setup_bot_profile(bot)  # commented out to speed up startup; uncomment in production
         await init_db()
         logger.info("Bot started")
 

@@ -85,6 +85,3 @@ error-link-download =
     <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Couldn’t download the video.</b>
 
     <blockquote>The link may be private, expired, or from an unsupported platform. Try a different link.</blockquote>
-
-inline-as-video-title = 🎥 Send as video
-inline-as-video-desc = Download and send directly to chat

@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import shutil
 import tempfile
 from pathlib import Path
@@ -8,6 +9,7 @@ import yt_dlp
 from app.core.constants import MAX_FILE_SIZE_BYTES, URL_PATTERN
 from app.services.errors import DownloadError, FileTooLargeError
 
+logger = logging.getLogger(__name__)
 
 _YT_DLP_FORMAT = "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4][height<=720]/best"
 

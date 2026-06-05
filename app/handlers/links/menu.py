@@ -6,7 +6,7 @@ from aiogram.types import Message
 from aiogram_i18n import I18nContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.database import UserCreate, upsert_user
+from app.database.user import UserCreate, upsert_user
 from app.keyboards import overlay_keyboard
 from app.services.download import DownloadError, FileTooLargeError, download_url, extract_url
 

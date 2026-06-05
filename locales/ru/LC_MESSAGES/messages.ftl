@@ -75,7 +75,3 @@ unknown-input =
 
 btn-android = Android — прозрачный фон
 btn-ios = iOS — белый фон
-
-inline-as-video-title = 🎥 Отправить видео
-inline-as-video-desc = Скачать и отправить прямо в чат
-
