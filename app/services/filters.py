@@ -21,7 +21,7 @@ def android_filters(
     files_dir: Path,
 ) -> ffmpeg.nodes.FilterableStream:
     plane = ffmpeg.input(str(files_dir / "plane.apng"), stream_loop=-1)
-    circle_mask = ffmpeg.input(str(files_dir / "android.png"))
+    circle_mask = ffmpeg.input(str(files_dir / "overlay.png"))
 
     # Crop to square, scale to 640 (keep -1 for blur bg, then scale up)
     base = src.video.filter("crop", _CROP, _CROP, _CROP_X, _CROP_Y).filter("scale", _SIZE, -1, flags="lanczos").split()
@@ -43,12 +43,11 @@ def ios_filters(
     src: ffmpeg.nodes.FilterableStream,
     files_dir: Path,
 ) -> ffmpeg.nodes.FilterableStream:
-    # Crop to square, apply circular alpha mask, composite on white background
-    hole = ffmpeg.input(str(files_dir / "ios.png"))
+    # Same circle mask as Android, but composited on white instead of blurred bg
+    circle_mask = ffmpeg.input(str(files_dir / "overlay.png"))
     white_bg = ffmpeg.input(f"color=c=white:s={_SIZE}x{_SIZE}:r=60", f="lavfi")
-    video = _crop_square(src)
-    on_white = ffmpeg.filter([white_bg, video], "overlay", 0, 0, shortest=1)
-    return ffmpeg.filter([on_white, hole], "overlay", 0, 0, shortest=1)
+    circle = ffmpeg.filter([_crop_square(src), circle_mask], "alphamerge")
+    return white_bg.overlay(circle, shortest=1)
 
 
 def build_filter_graph(

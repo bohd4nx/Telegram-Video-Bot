@@ -1,3 +1,5 @@
+from html import escape
+
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
@@ -10,5 +12,5 @@ router = Router(name=__name__)
 async def start_command(message: Message, i18n: I18nContext) -> None:
     user = message.from_user
     name = user.first_name if user else ""
-    text = i18n.get("start", name=name)
+    text = i18n.get("start", name=escape(name))
     await message.answer(text)

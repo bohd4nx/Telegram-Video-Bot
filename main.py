@@ -10,6 +10,7 @@ from aiogram_i18n.cores.fluent_compile_core import FluentCompileCore
 
 from app.core import config, logger, setup_logging
 from app.handlers import router
+from app.middlewares.i18n import LocaleMiddleware
 
 
 async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
@@ -19,8 +20,9 @@ async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
     dp = Dispatcher(storage=MemoryStorage())
     dp.include_router(router)
 
-    i18n = I18nMiddleware(core=i18n_core, default_locale="en")
+    i18n = I18nMiddleware(core=i18n_core, default_locale="ru")
     i18n.setup(dispatcher=dp)
+    dp.update.outer_middleware(LocaleMiddleware())
 
     @dp.startup()
     async def on_startup() -> None:

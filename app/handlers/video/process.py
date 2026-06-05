@@ -62,20 +62,19 @@ async def process_video(
     status_msg: Message,
     i18n: I18nContext,
     bot: Bot,
-    overlay: str = "android",
+    overlay: str = "ios",
 ) -> None:
     file_size_mb = round(file_size / (1024 * 1024), 1)
     source: Path | None = None
     encoded: list[tuple[Path, int]] = []
 
     try:
-        await bot.send_chat_action(chat_id=chat_id, action=ChatAction.UPLOAD_VIDEO_NOTE)
+        await bot.send_chat_action(chat_id=chat_id, action=ChatAction.RECORD_VIDEO_NOTE)
         source = await _download_video(file_id, bot)
         encoded = await _encode_all_segments(source, chat_id, bot, overlay)
 
-        await status_msg.delete()
-
         for seg_path, seg_duration in encoded:
+            await bot.send_chat_action(chat_id=chat_id, action=ChatAction.UPLOAD_VIDEO_NOTE)
             await bot.send_video_note(
                 chat_id=chat_id,
                 video_note=FSInputFile(seg_path),
@@ -83,6 +82,8 @@ async def process_video(
                 length=640,
                 reply_to_message_id=original_msg_id,
             )
+
+        await status_msg.delete()
 
     except TelegramEntityTooLarge:
         await status_msg.edit_text(i18n.get("error-file-too-large", size=file_size_mb))

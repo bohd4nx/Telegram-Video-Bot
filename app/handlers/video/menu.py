@@ -25,8 +25,5 @@ async def video_received(message: Message, state: FSMContext, i18n: I18nContext)
     )
     await message.reply(
         i18n.get("overlay-choose"),
-        reply_markup=overlay_keyboard(
-            android_text=i18n.get("btn-android"),
-            ios_text=i18n.get("btn-ios"),
-        ),
+        reply_markup=overlay_keyboard(i18n),
     )

@@ -13,5 +13,4 @@ router = Router(name=__name__)
 async def handle_unknown_input(message: Message, i18n: I18nContext) -> None:
     user_id = message.from_user.id if message.from_user else "unknown"
     logger.debug("Unknown input from user %s: %s", user_id, message.content_type)
-    await message.delete()
     await message.answer(i18n.get("unknown-input"))
