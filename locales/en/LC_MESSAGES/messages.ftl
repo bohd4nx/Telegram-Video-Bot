@@ -1,3 +1,8 @@
+choose-overlay-text = 🎨 <b>Choose overlay style:</b>
+
+    🤖 <b>Android</b> — transparent background on the circle
+    🍎 <b>iOS</b> — white background on the circle
+
 help-text = 📝 <b>Video Requirements:</b>
 
     • <b>Format:</b> Square (optimal), otherwise will be cropped
@@ -13,7 +18,7 @@ help-text = 📝 <b>Video Requirements:</b>
     4️⃣ Enable <code>Hide sender's name</code> option
     5️⃣ Send
 
-    💡 <b>Tips:</b>  
+    💡 <b>Tips:</b>
     • Square format videos deliver best results
     • Lower resolution speeds up processing
     • Keep videos concise for better quality
@@ -39,12 +44,12 @@ start-text = 👋 <b>Hello, {$name}!</b>
     ℹ️ Use /help for detailed instructions.
 
 processing-text = ⏳ <b>Video is being processed</b>
-    
+
     ℹ️ Usually takes 5-10 seconds if all rules are followed...
 
 unknown-input-text = ❓ Please send a video file or use these commands:
 
-    /start - Begin using the bot  
+    /start - Begin using the bot
     /help - View instructions
 
 processing-error-text = ❌ <b>Processing error:</b> {$error}

@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.types import BotCommand
@@ -33,7 +34,7 @@ async def main() -> None:
     logger.info(f"Loaded locales: {i18n_core.available_locales}")
     i18n = I18nMiddleware(core=i18n_core, default_locale="en")
 
-    dp = Dispatcher()
+    dp = Dispatcher(storage=MemoryStorage())
 
     dp.include_router(router)
 
