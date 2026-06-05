@@ -7,6 +7,8 @@ from app.services.filters import build_filter_graph
 
 logger = logging.getLogger(__name__)
 
+_FILES_DIR = Path(__file__).resolve().parents[2] / "files"
+
 _VIDEO_OPTS: dict = dict(
     vcodec="libx264",
     preset="ultrafast",
@@ -28,11 +30,10 @@ def encode_segment(
     out_path: Path,
     start: float,
     duration: float,
-    files_dir: Path,
     overlay_type: str,
 ) -> int:
     src = ffmpeg.input(str(in_path), ss=start, t=duration, hwaccel="auto")
-    video = build_filter_graph(src, files_dir, overlay_type).filter("format", "yuv420p")
+    video = build_filter_graph(src, _FILES_DIR, overlay_type).filter("format", "yuv420p")
 
     try:
         ffmpeg.output(

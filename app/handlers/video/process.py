@@ -22,7 +22,6 @@ from .states import VideoState
 logger = logging.getLogger(__name__)
 router = Router(name=__name__)
 
-_FILES_DIR = Path(__file__).resolve().parents[3] / "files"
 _SEGMENT_DURATION = 60.0
 
 
@@ -136,7 +135,6 @@ async def _encode_all_segments(
             out_path,
             start,
             min(_SEGMENT_DURATION, total - start),
-            _FILES_DIR,
             overlay,
         )
         segments.append((out_path, seg_duration))

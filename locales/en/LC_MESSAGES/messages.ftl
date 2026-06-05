@@ -1,53 +1,62 @@
 start =
-    👋 <b>Hello, { $name }!</b>
+    <tg-emoji emoji-id="5469774158650942877">🤙</tg-emoji> <b>Hello, { $name }!</b>
 
-    <blockquote>Send me any video — I'll turn it into a round video message.</blockquote>
+    <blockquote>Send me any video — I'll convert it into a round video message (a "circle") ready to send in any Telegram chat.
+
+    Just drop a video, pick a style, and get your circle in seconds.</blockquote>
 
 help =
-    📋 <b>Video requirements</b>
+    <tg-emoji emoji-id="5373039692574893940">👨‍🏫</tg-emoji>  <b>Video requirements</b>
 
-    • <b>Format:</b> square — otherwise it'll be cropped
-    • <b>Quality:</b> 480p is enough for fast processing
-    • <b>Duration:</b> up to 60 seconds
+    • <b>Format:</b> square — non-square videos will be cropped to a centered square
+    • <b>Quality:</b> 480p is enough; higher resolution only slows things down
+    • <b>Duration:</b> up to 60 seconds per circle (longer videos are split automatically)
     • <b>Size:</b> up to 20 MB
 
-    <blockquote>💡 Shorter and smaller videos process faster and produce better quality circles.</blockquote>
+    <blockquote><tg-emoji emoji-id="5472146462362048818">💡</tg-emoji> Shorter and lighter videos process faster and produce sharper circles. If quality matters — keep it under 15 MB and 30 seconds.</blockquote>
 
 voice-disabled =
-    🔒 <b>Voice Messages Disabled</b>
+    <tg-emoji emoji-id="5472308992514464048">🔐</tg-emoji> <b>Voice Messages Disabled</b>
 
-    To receive the video circle, please enable voice messages:
+    Telegram requires your voice messages to be open so the bot can deliver the circle to you.
 
-    1️⃣ Open <b>Settings</b>
-    2️⃣ Go to <b>Privacy and Security</b>
-    3️⃣ Tap <b>Voice Messages</b>
-    4️⃣ Set to <b>Everyone</b>
+    To fix this:
+    <tg-emoji emoji-id="5408894951440279259">1️⃣</tg-emoji> Open <b>Settings</b>
+    <tg-emoji emoji-id="5411585799990830248">2️⃣</tg-emoji> Go to <b>Privacy and Security</b>
+    <tg-emoji emoji-id="5409189019261103031">3️⃣</tg-emoji> Tap <b>Voice Messages</b>
+    <tg-emoji emoji-id="5411500398861118321">4️⃣</tg-emoji> Set to <b>Everyone</b>
 
-    Then send your video again.
+    <blockquote>This is a Telegram privacy restriction — the bot cannot bypass it. Once enabled, send your video again.</blockquote>
 
 overlay-choose =
-    🎨 <b>Choose an overlay style</b>
+    <tg-emoji emoji-id="5431456208487716895">🎨</tg-emoji> <b>Choose an overlay style</b>
 
-    The style determines how the circle looks on different platforms.
+    <blockquote><tg-emoji emoji-id="5818920837645867167">📱</tg-emoji> <b>iOS</b> — white circle on a white background. The border blends into the chat, looks neat on any theme.
+    <tg-emoji emoji-id="5819078828017849357">🤖</tg-emoji> <b>Android</b> — transparent background with an animated plane flying around the circle. Flashy and fun.</blockquote>
 
 processing =
-    ⏳ <b>Your video is being processed…</b>
+    <tg-emoji emoji-id="5451732530048802485">⏳</tg-emoji> <b>Your video is being processed…</b>
 
-    Usually takes 5–10 seconds. Please wait.
+    <blockquote>Usually takes 5–10 seconds depending on the video length and size. The circle will appear here as soon as it's ready — please wait.</blockquote>
 
-error-processing = ❌ <b>An error occurred while processing your video:</b> { $error }
+error-processing =
+    <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Something went wrong while processing your video.</b>
+
+    <blockquote>Our team is already looking into it. Please try again in a few minutes — it should work soon.</blockquote>
 
 error-file-too-large =
-    ⚠️ <b>File is too large</b> — { $size } MB
+    <tg-emoji emoji-id="5334673106202010226">✏️</tg-emoji> <b>File is too large</b> — { $size } MB
 
-    <blockquote>Maximum allowed size is <b>20 MB</b>. Please reduce the video size and try again.</blockquote>
+    <blockquote>Maximum allowed size is <b>20 MB</b>. Compress the video or trim it before sending.</blockquote>
 
 unknown-input =
-    ❓ <b>This bot only works with video files.</b>
+    <tg-emoji emoji-id="5467890025217661107">‼️</tg-emoji> <b>This bot only works with video files.</b>
 
-    Send a video or use a command:
+    <blockquote>Send a video file — not a photo, document, or voice message — and the bot will convert it into a circle.
+
+    Commands:
     /start — start over
-    /help — instructions
+    /help — requirements and tips</blockquote>
 
 btn-android = Android — transparent background
 btn-ios = iOS — white background
