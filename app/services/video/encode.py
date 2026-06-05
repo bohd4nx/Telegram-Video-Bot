@@ -39,13 +39,18 @@ def encode_segment(
     src = ffmpeg.input(str(in_path), ss=start, t=duration, hwaccel="auto")
     video = build_filter_graph(src, _FILES_DIR, overlay_type).filter("format", "yuv420p")
 
+    # Check whether the source has an audio stream
+    probe = ffmpeg.probe(str(in_path))
+    has_audio = any(s["codec_type"] == "audio" for s in probe.get("streams", []))
+
+    streams = [video, src.audio] if has_audio else [video]
+    opts = {**_VIDEO_OPTS, **({"acodec": "aac", "audio_bitrate": "128k"} if has_audio else {})}
+
     try:
         ffmpeg.output(
-            video,
-            src.audio,
+            *streams,
             str(out_path),
-            **_VIDEO_OPTS,
-            **_AUDIO_OPTS,
+            **opts,
         ).overwrite_output().run(capture_stdout=True, capture_stderr=True, quiet=True)
     except ffmpeg.Error as e:
         logger.error("Error encoding segment: %s", e.stderr.decode() if e.stderr else "unknown error")
