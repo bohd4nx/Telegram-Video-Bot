@@ -12,17 +12,25 @@ class Config:
     def __init__(self) -> None:
         env_path = Path(__file__).resolve().parents[2] / ".env"
 
-        if not env_path.exists():
-            logger.error(".env file not found!")
-            sys.exit(1)
-
         load_dotenv(env_path)
 
-        if not os.getenv("BOT_TOKEN"):
-            logger.error("Missing required env variable: BOT_TOKEN")
-            sys.exit(1)
+        self.BOT_TOKEN: str = self._require_env("BOT_TOKEN")
 
-        self.BOT_TOKEN: str = os.getenv("BOT_TOKEN")  # type: ignore[assignment]
+        self.POSTGRES_USER: str = self._require_env("POSTGRES_USER")
+        self.POSTGRES_PASSWORD: str = self._require_env("POSTGRES_PASSWORD")
+        self.POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "db")
+        self.POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
+        self.POSTGRES_DB: str = self._require_env("POSTGRES_DB")
+
+    @staticmethod
+    def _require_env(name: str) -> str:
+        value = os.getenv(name)
+        if value and value.strip():
+            return value
+
+        logger.error("Missing required environment variable: %s", name)
+        sys.exit(1)
 
 
 config = Config()
+

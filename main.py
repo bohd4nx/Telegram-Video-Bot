@@ -9,8 +9,9 @@ from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_compile_core import FluentCompileCore
 
 from app.core import config, logger, setup_logging
+from app.database import close_db, init_db
 from app.handlers import router
-from app.middlewares.i18n import LocaleMiddleware
+from app.middlewares import DatabaseMiddleware, LocaleMiddleware
 
 
 async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
@@ -23,15 +24,18 @@ async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
     i18n = I18nMiddleware(core=i18n_core, default_locale="ru")
     i18n.setup(dispatcher=dp)
     dp.update.outer_middleware(LocaleMiddleware())
+    dp.update.outer_middleware(DatabaseMiddleware())
 
     @dp.startup()
     async def on_startup() -> None:
         # await setup_bot_profile(bot)  # commented out to speed up startup; uncomment in production
+        await init_db()
         logger.info("Bot started")
 
     @dp.shutdown()
     async def on_shutdown() -> None:
         await i18n.core.shutdown()
+        await close_db()
 
     return dp, i18n
 

@@ -6,18 +6,10 @@ from pathlib import Path
 import yt_dlp
 
 from app.core.constants import MAX_FILE_SIZE_BYTES, URL_PATTERN
+from app.services.errors import DownloadError, FileTooLargeError
+
 
 _YT_DLP_FORMAT = "bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[ext=mp4][height<=720]/best"
-
-
-class DownloadError(Exception):
-    pass
-
-
-class FileTooLargeError(DownloadError):
-    def __init__(self, size_mb: float) -> None:
-        self.size_mb = size_mb
-        super().__init__(f"File too large: {size_mb} MB")
 
 
 def extract_url(text: str) -> str | None:
