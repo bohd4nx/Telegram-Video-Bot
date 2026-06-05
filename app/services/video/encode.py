@@ -1,13 +1,17 @@
 import logging
+import tempfile
 from pathlib import Path
 
 import ffmpeg
+from aiogram import Bot
+from aiogram.enums import ChatAction
 
-from app.services.filters import build_filter_graph
+from app.core.constants import SEGMENT_DURATION
+from app.services.video.filters import build_filter_graph
 
 logger = logging.getLogger(__name__)
 
-_FILES_DIR = Path(__file__).resolve().parents[2] / "files"
+_FILES_DIR = Path(__file__).resolve().parents[3] / "files"
 
 _VIDEO_OPTS: dict = dict(
     vcodec="libx264",
@@ -48,3 +52,32 @@ def encode_segment(
         raise
 
     return int(float(ffmpeg.probe(str(out_path))["format"]["duration"]))
+
+
+async def encode_all_segments(
+    source: Path,
+    chat_id: int,
+    bot: Bot,
+    overlay: str,
+) -> list[tuple[Path, int]]:
+    total = float(ffmpeg.probe(str(source))["format"]["duration"])
+    segments: list[tuple[Path, int]] = []
+    start = 0.0
+
+    while start < total:
+        await bot.send_chat_action(chat_id=chat_id, action=ChatAction.RECORD_VIDEO_NOTE)
+
+        with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as f:
+            out_path = Path(f.name)
+
+        seg_duration = encode_segment(
+            source,
+            out_path,
+            start,
+            min(SEGMENT_DURATION, total - start),
+            overlay,
+        )
+        segments.append((out_path, seg_duration))
+        start += SEGMENT_DURATION
+
+    return segments

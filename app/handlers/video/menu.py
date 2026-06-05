@@ -5,7 +5,8 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from aiogram_i18n import I18nContext
 
-from .keyboards import overlay_keyboard
+from app.keyboards import overlay_keyboard
+
 from .states import VideoState
 
 logger = logging.getLogger(__name__)

@@ -60,3 +60,13 @@ unknown-input =
 
 btn-android = Android — прозрачный фон
 btn-ios = iOS — белый фон
+
+link-downloading =
+    <tg-emoji emoji-id="5451732530048802485">⏳</tg-emoji> <b>Скачиваю видео…</b>
+
+    <blockquote>Получаю видео по ссылке. Обычно занимает несколько секунд.</blockquote>
+
+error-link-download =
+    <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Не удалось скачать видео.</b>
+
+    <blockquote>Ссылка может быть закрытой, устаревшей или вести на неподдерживаемую платформу. Попробуйте другую ссылку.</blockquote>
