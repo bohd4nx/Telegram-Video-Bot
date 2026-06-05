@@ -39,6 +39,16 @@ processing =
 
     <blockquote>Usually takes 5–10 seconds depending on the video length and size. The circle will appear here as soon as it's ready — please wait.</blockquote>
 
+link-downloading =
+    <tg-emoji emoji-id="5451732530048802485">⏳</tg-emoji> <b>Downloading video…</b>
+
+    <blockquote>Fetching the video from the link. Usually takes a few seconds.</blockquote>
+
+error-link-download =
+    <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Couldn’t download the video.</b>
+
+    <blockquote>The link may be private, expired, or from an unsupported platform. Try a different link.</blockquote>
+
 error-processing =
     <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Something went wrong while processing your video.</b>
 
@@ -60,13 +70,3 @@ unknown-input =
 
 btn-android = Android — transparent background
 btn-ios = iOS — white background
-
-link-downloading =
-    <tg-emoji emoji-id="5451732530048802485">⏳</tg-emoji> <b>Downloading video…</b>
-
-    <blockquote>Fetching the video from the link. Usually takes a few seconds.</blockquote>
-
-error-link-download =
-    <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Couldn’t download the video.</b>
-
-    <blockquote>The link may be private, expired, or from an unsupported platform. Try a different link.</blockquote>

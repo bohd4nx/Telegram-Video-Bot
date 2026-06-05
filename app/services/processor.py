@@ -2,12 +2,14 @@ import logging
 from pathlib import Path
 
 from aiogram import Bot
-from aiogram.types import Message
+from aiogram.enums import ChatAction
+from aiogram.types import FSInputFile, Message
 from aiogram_i18n import I18nContext
+
+from app.core.constants import VIDEO_OUTPUT_SIZE
 
 from .errors import handle_errors
 from .video.encode import encode_all_segments
-from .video.sender import send_video_notes
 
 logger = logging.getLogger(__name__)
 
@@ -21,20 +23,30 @@ async def process_and_send(
     i18n: I18nContext,
     bot: Bot,
 ) -> None:
-    """
-    Core pipeline: encode source → send video notes → cleanup.
-    All Telegram errors are handled and mapped to i18n messages.
-    """
-    segments: list[tuple[Path, int]] = []
+    files_to_delete = [source]
+
     try:
         segments = await encode_all_segments(source, chat_id, bot, overlay)
-        await send_video_notes(bot, chat_id, original_msg_id, segments)
+        files_to_delete.extend(path for path, _ in segments)
+
+        for path, duration in segments:
+            await bot.send_chat_action(
+                chat_id=chat_id,
+                action=ChatAction.UPLOAD_VIDEO_NOTE,
+            )
+            await bot.send_video_note(
+                chat_id=chat_id,
+                video_note=FSInputFile(path),
+                duration=duration,
+                length=VIDEO_OUTPUT_SIZE,
+                reply_to_message_id=original_msg_id,
+            )
+
         await status_msg.delete()
 
     except Exception as exc:
         await handle_errors(exc, source, status_msg, i18n)
 
     finally:
-        for seg_path, _ in segments:
-            seg_path.unlink(missing_ok=True)
-        source.unlink(missing_ok=True)
+        for path in files_to_delete:
+            path.unlink(missing_ok=True)
