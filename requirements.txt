@@ -1,6 +1,0 @@
-aiogram==3.24.0
-python-dotenv==1.2.1
-ffmpeg-python==0.2.0
-fluent-runtime==0.4.0
-aiogram_i18n==1.4
-fluent_compiler==1.1

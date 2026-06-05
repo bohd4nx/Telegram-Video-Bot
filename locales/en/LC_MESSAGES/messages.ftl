@@ -1,65 +1,53 @@
-choose-overlay-text = 🎨 <b>Choose overlay style:</b>
+start =
+    👋 <b>Hello, { $name }!</b>
 
-    🤖 <b>Android</b> — transparent background on the circle
-    🍎 <b>iOS</b> — white background on the circle
+    <blockquote>Send me any video — I'll turn it into a round video message.</blockquote>
 
-help-text = 📝 <b>Video Requirements:</b>
+help =
+    📋 <b>Video requirements</b>
 
-    • <b>Format:</b> Square (optimal), otherwise will be cropped
-    • <b>Quality:</b> 480p (optimal for faster processing)
-    • <b>Duration:</b> Maximum 60 seconds
-    • <b>Size:</b> Up to 20 MB
+    • <b>Format:</b> square — otherwise it'll be cropped
+    • <b>Quality:</b> 480p is enough for fast processing
+    • <b>Duration:</b> up to 60 seconds
+    • <b>Size:</b> up to 20 MB
 
-    📱 <b>How to Share Video Message:</b>
+    <blockquote>💡 Shorter and smaller videos process faster and produce better quality circles.</blockquote>
 
-    1️⃣ Select your video
-    2️⃣ Tap <code>Forward</code>
-    3️⃣ Choose recipient
-    4️⃣ Enable <code>Hide sender's name</code> option
-    5️⃣ Send
+voice-disabled =
+    🔒 <b>Voice Messages Disabled</b>
 
-    💡 <b>Tips:</b>
-    • Square format videos deliver best results
-    • Lower resolution speeds up processing
-    • Keep videos concise for better quality
+    To receive the video circle, please enable voice messages:
 
-voice-messages-disabled-text = 🔒 <b>Voice Messages Disabled</b>
+    1️⃣ Open <b>Settings</b>
+    2️⃣ Go to <b>Privacy and Security</b>
+    3️⃣ Tap <b>Voice Messages</b>
+    4️⃣ Set to <b>Everyone</b>
 
-    To receive video notes, please enable voice messages:
+    Then send your video again.
 
-    1️⃣ Go to <b>Settings</b>
-    2️⃣ Select <b>Privacy and Security</b>
-    3️⃣ Choose <b>Voice Messages</b>
-    4️⃣ Set to <b>"Everyone"</b>
+overlay-choose =
+    🎨 <b>Choose an overlay style</b>
 
-    Then send your video again!
+    The style determines how the circle looks on different platforms.
 
-start-text = 👋 <b>Hello, {$name}!</b>
+processing =
+    ⏳ <b>Your video is being processed…</b>
 
-    🎥 I'll convert your videos into round message format.
-    Simply send any video to get started.
+    Usually takes 5–10 seconds. Please wait.
 
-    📌 <b>Note:</b> Ensure your voice messages are enabled to receive video notes.
+error-processing = ❌ <b>An error occurred while processing your video:</b> { $error }
 
-    ℹ️ Use /help for detailed instructions.
+error-file-too-large =
+    ⚠️ <b>File is too large</b> — { $size } MB
 
-processing-text = ⏳ <b>Video is being processed</b>
+    <blockquote>Maximum allowed size is <b>20 MB</b>. Please reduce the video size and try again.</blockquote>
 
-    ℹ️ Usually takes 5-10 seconds if all rules are followed...
+unknown-input =
+    ❓ <b>This bot only works with video files.</b>
 
-unknown-input-text = ❓ Please send a video file or use these commands:
+    Send a video or use a command:
+    /start — start over
+    /help — instructions
 
-    /start - Begin using the bot
-    /help - View instructions
-
-processing-error-text = ❌ <b>Processing error:</b> {$error}
-
-file-too-large-text = ⚠️ <b>File too large:</b> {$size} MB
-
-    📌 <b>Maximum size:</b> 20 MB
-
-    💡 <b>How to compress:</b>
-    • Use lower resolution (720p or 480p)
-    • Reduce video bitrate
-    • Trim unnecessary parts
-    • Use online compressor (e.g., VideoSmaller)
+btn-android = Android — transparent background
+btn-ios = iOS — white background

@@ -5,7 +5,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import BotCommand
 from aiogram_i18n import I18nMiddleware
 from aiogram_i18n.cores.fluent_compile_core import FluentCompileCore
 
@@ -27,11 +26,8 @@ async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
 
     @dp.startup()
     async def on_startup() -> None:
-        commands = [
-            BotCommand(command="start", description="🚀 Start the app"),
-            BotCommand(command="help", description="📖 Show help information"),
-        ]
-        await bot.set_my_commands(commands)
+        # await setup_bot_profile(bot)  # commented out to speed up startup; uncomment in production
+        logger.info("Bot started")
 
     @dp.shutdown()
     async def on_shutdown() -> None:

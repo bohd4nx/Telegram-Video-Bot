@@ -1,6 +1,6 @@
 from aiogram import Router
 
-from . import commands, video, unknown
+from . import commands, unknown, video
 
 router = Router(name=__name__)
 router.include_routers(

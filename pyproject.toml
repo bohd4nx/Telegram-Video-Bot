@@ -1,0 +1,39 @@
+[project]
+name = "video-bot"
+version = "2026.1.0"
+description = "Telegram bot that converts videos into round video messages"
+requires-python = ">=3.10"
+dependencies = [
+    "aiogram[i18n]>=3.28.0",
+    "aiogram_i18n>=1.4",
+    "fluent_compiler==1.1",
+    "python-dotenv>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy",
+    "pytest",
+    "pytest-asyncio",
+]
+
+[build-system]
+requires = ["setuptools>=80.10.1"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests*"]
+
+[tool.mypy]
+python_version = "3.10"
+explicit_package_bases = true
+exclude = ["^build/"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
