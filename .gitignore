@@ -1,35 +1,49 @@
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
 .Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Virtual environments
-.venv/
+# Virtual Environment
 venv/
-
-# IDE
-.idea/
-.vscode/
+.venv/
+env/
 
 # Environment variables
 .env
-# .env.*
+.env.local
 
-# System files
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+/logs/
+
+# OS
 .DS_Store
 Thumbs.db
 
-# Files and folders 
-logs/
-*.log
-downloads/
-temp/
-temp_*/
-output/
-files/telegram.png
-files/plane.json
-files/circle.png
-files/hole.png
-app/new_overlay/
+# Admin
+admin/
+*admin.*

@@ -14,10 +14,16 @@ router = Router(name=__name__)
 
 @router.message(F.video)
 async def video_received(message: Message, state: FSMContext, i18n: I18nContext) -> None:
+    if message.video is None:
+        return
+
     user_id = message.from_user.id if message.from_user else "unknown"
-    logger.info("User %s sent a video, asking for overlay choice", user_id)
     await state.set_state(VideoState.waiting_overlay)
-    await state.update_data(video_message_id=message.message_id)
+    await state.update_data(
+        video_message_id=message.message_id,
+        video_file_id=message.video.file_id,
+        video_file_size=message.video.file_size,
+    )
     await message.answer(
         i18n.get("overlay-choose"),
         reply_markup=overlay_keyboard(

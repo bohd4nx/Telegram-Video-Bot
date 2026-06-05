@@ -13,9 +13,7 @@ from app.handlers import router
 
 
 async def build_dispatcher(bot: Bot) -> tuple[Dispatcher, I18nMiddleware]:
-    i18n_core = FluentCompileCore(
-        path=str(Path(__file__).parent / "locales" / "{locale}" / "LC_MESSAGES")
-    )
+    i18n_core = FluentCompileCore(path=str(Path(__file__).parent / "locales" / "{locale}" / "LC_MESSAGES"))
     await i18n_core.startup()
 
     dp = Dispatcher(storage=MemoryStorage())

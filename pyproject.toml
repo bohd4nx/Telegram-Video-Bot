@@ -8,6 +8,9 @@ dependencies = [
     "aiogram_i18n>=1.4",
     "fluent_compiler==1.1",
     "python-dotenv>=1.2.0",
+    "ffmpeg-python>=0.2.0",
+    "Pillow>=10.0.0",
+    "rlottie-python>=1.3.0",
 ]
 
 [project.optional-dependencies]
@@ -31,8 +34,12 @@ python_version = "3.10"
 explicit_package_bases = true
 exclude = ["^build/"]
 
+[[tool.mypy.overrides]]
+module = "ffmpeg.*"
+ignore_missing_imports = true
+
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py310"
 
 [tool.ruff.lint]
