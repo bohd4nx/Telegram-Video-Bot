@@ -1,157 +1,103 @@
 <div align="center">
-  <img src="files/logo.svg" alt="Bot Logo" width="120"
-  height="120" style="border-radius: 24px;">
 
-  <h1 style="margin-top: 24px;">🎥 Telegram Video Bot</h1>
+# video-bot
 
-  <p style="font-size: 18px; color: #666; margin-bottom: 24px;">
-    <strong>Transform regular videos into perfect circular video notes</strong>
-  </p>
+Telegram bot that converts any video — or a TikTok / Instagram / YouTube Shorts link — into a **round video note** (video circle).
+Supports iOS and Android overlay styles, automatic segmentation of long videos, and PostgreSQL-backed download history.
 
-  <p>
-    <a href="https://github.com/bohd4nx/Telegram-Video-Bot/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/bohd4nx/Telegram-Video-Bot/issues">Request Feature</a>
-    ·
-    <a href="https://t.me/RoundMsgBot">Try Demo</a>
-  </p>
+**[Try Demo](https://t.me/RoundMsgBot)** · **[Report Bug](https://github.com/bohd4nx/Telegram-Video-Bot/issues)** · **[Request Feature](https://github.com/bohd4nx/Telegram-Video-Bot/issues)**
 
 </div>
 
-## ✨ Features
+---
 
-- 🎯 **Circle Videos** - Creates perfect circular videos with the same overlay as in Telegram for Android
-- ⚡ **Fast Processing** - Uses optimized ffmpeg pipeline for maximum speed
-- 🎵 **Audio Encoding** - Encodes audio to AAC 96k for optimal quality and size
-- 📐 **Smart Cropping** - Automatic centering and scaling
-- 🎬 **Video Segmentation** - Automatically splits long videos into 60-second segments
-- 🔧 **Simple Usage** - Only /start and /help commands
+## Features
 
-## 🚀 Quick Start
+- **Circle conversion** — crops, masks, and scales any video to a perfect 640×640 round note
+- **Overlay styles** — iOS (white border) or Android (transparent) — user chooses per video
+- **URL downloads** — paste a TikTok, Instagram Reel, or YouTube Shorts link and get a circle
+- **Auto-segmentation** — videos longer than 60 s are split and sent as sequential notes
+- **i18n** — Russian and English, auto-detected from Telegram locale
+- **PostgreSQL** — stores users and download history
 
-### 1. Installation
+---
+
+## Quick Start
+
+### Docker (recommended)
 
 ```bash
 git clone https://github.com/bohd4nx/Telegram-Video-Bot.git
 cd Telegram-Video-Bot
-pip install -r requirements.txt
+cp .env.example .env   # fill in BOT_TOKEN, POSTGRES_*
+docker compose up -d
 ```
 
-### 2. Install FFmpeg
+### Local
 
 ```bash
-# macOS (Homebrew)
-brew install ffmpeg
+git clone https://github.com/bohd4nx/Telegram-Video-Bot.git
+cd Telegram-Video-Bot
 
-# Ubuntu/Debian
-sudo apt update && sudo apt install ffmpeg
+# requires Python 3.10+ and ffmpeg installed
+pip install .
 
-# Windows (Chocolatey)
-choco install ffmpeg
-
-# Windows (Scoop)
-scoop install ffmpeg
-```
-
-### 3. Configuration
-
-Create `.env` file in project root:
-
-```env
-# Get token from @BotFather
-BOT_TOKEN=your_bot_token_here
-```
-
-### 4. Run
-
-```bash
+cp .env.example .env   # fill in BOT_TOKEN, POSTGRES_*
 python main.py
 ```
 
-## 📱 Usage
+**Install ffmpeg:**
 
-### Bot Commands
-
-- `/start` - Welcome message and instructions
-- `/help` - Detailed usage guide
-
-### Video Processing Flow
-
-1. Send video to bot
-2. Wait for processing (⏳ Processing...)
-3. Receive circular video with white background (like original Telegram format)
-4. Forward as regular video note
-
-## 📋 Video Requirements
-
-### Input Parameters
-
-- **Format**: MP4, AVI, MOV and others
-- **Size**: Up to 20MB
-- **Duration**: Recommended up to 60 seconds
-- **Resolution**: Any (automatically processed)
-
-### Output Specifications
-
-- **Format**: Circular video (video note)
-- **Resolution**: Up to 640×640 (optimized for Telegram)
-- **Codec**: H.264 + AAC
-- **Background**: White outside circle
-- **Audio**: Preserved from original
-
-## ⚙️ Technical Implementation
-
-### Processing Algorithm
-
-1. **Download** - Get video from user
-2. **Analysis** - Determine dimensions and parameters
-3. **Cropping** - Extract square from frame center
-4. **Mask** - Apply circular mask with white background
-5. **Scaling** - Resize to optimal dimensions
-6. **Audio** - Merge with original audio via FFmpeg
-7. **Upload** - Send as video note to Telegram
-
-### Optimization
-
-- Maximum resolution 640×640 for Telegram compliance
-- Even dimensions for codec compatibility
-- Fast FFmpeg presets for speed
-- Automatic temporary file cleanup
-
-## 🐛 Error Handling
-
-| Error                   | Cause                     | Solution           |
-| ----------------------- | ------------------------- | ------------------ |
-| File too large          | File > 20MB               | Compress video     |
-| Voice messages disabled | Voice messages turned off | Enable in settings |
-| Processing error        | Processing failure        | Check video format |
-
-## 🛠️ Deployment
-
-### Docker (Optional)
-
-```dockerfile
-FROM python:3.12-slim
-RUN apt-get update && apt-get install -y ffmpeg
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["python", "main.py"]
+```bash
+brew install ffmpeg          # macOS
+sudo apt install ffmpeg      # Ubuntu/Debian
+choco install ffmpeg         # Windows
 ```
 
-### Environment Variables
+---
 
-```env
-BOT_TOKEN=your_telegram_bot_token
-```
+## Configuration
+
+Copy `.env.example` to `.env` and fill in the values:
+
+| Variable            | Required | Default | Description                                     |
+| ------------------- | -------- | ------- | ----------------------------------------------- |
+| `BOT_TOKEN`         | ✅       | —       | Token from [@BotFather](https://t.me/BotFather) |
+| `POSTGRES_USER`     | ✅       | —       | PostgreSQL username                             |
+| `POSTGRES_PASSWORD` | ✅       | —       | PostgreSQL password                             |
+| `POSTGRES_DB`       | ✅       | —       | PostgreSQL database name                        |
+| `POSTGRES_HOST`     | —        | `db`    | PostgreSQL host (Docker service name)           |
+| `POSTGRES_PORT`     | —        | `5432`  | PostgreSQL port                                 |
+| `ADMIN_IDS`         | —        | —       | Comma-separated admin Telegram IDs              |
+| `SUPPORT_URL`       | —        | —       | Support link shown in /help                     |
+
+---
+
+## Usage
+
+### Commands
+
+| Command  | Description     |
+| -------- | --------------- |
+| `/start` | Welcome message |
+| `/help`  | Usage guide     |
+
+### Sending a video
+
+1. Send any video file → bot asks for overlay style (iOS / Android)
+2. Choose overlay → bot processes and sends back round video note(s)
+
+### Sending a URL
+
+1. Paste a TikTok, Instagram Reel, or YouTube Shorts link
+2. Bot downloads and processes it the same way
 
 ---
 
 <div align="center">
 
-### Made with ❤️ by [@bohd4nx](https://t.me/bohd4nx)
+Made with ❤️ by [@bohd4nx](https://t.me/bohd4nx) · [Contributing](CONTRIBUTING.md)
 
-**Star ⭐ this repo if you found it useful!**
+**Star ⭐ if you found it useful**
 
 </div>
