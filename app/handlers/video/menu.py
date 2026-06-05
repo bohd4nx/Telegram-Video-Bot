@@ -19,4 +19,3 @@ async def video_received(
         i18n.get("choose-overlay-text"),
         reply_markup=overlay_keyboard(),
     )
-

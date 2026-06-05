@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import Bot, Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import StateFilter
@@ -6,16 +8,21 @@ from aiogram_i18n import I18nContext
 
 from .states import VideoState
 
+logger = logging.getLogger(__name__)
 router = Router(name=__name__)
 
 
-@router.callback_query(StateFilter(VideoState.waiting_overlay), F.data.startswith("overlay:"))
+@router.callback_query(
+    StateFilter(VideoState.waiting_overlay), F.data.startswith("overlay:")
+)
 async def overlay_chosen(
     callback: CallbackQuery,
     state: FSMContext,
     i18n: I18nContext,
     bot: Bot,
 ) -> None:
+    if not isinstance(callback.message, Message) or callback.data is None:
+        return
     overlay = callback.data.split(":")[1]  # "android" | "ios"
     data = await state.get_data()
     await state.clear()
@@ -34,5 +41,8 @@ async def overlay_chosen(
 async def process_video(
     message: Message, i18n: I18nContext, bot: Bot, overlay: str = "ios"
 ) -> None:
+    logger.info(
+        "Processing video with overlay=%s for chat %s", overlay, message.chat.id
+    )
     # TODO: implement actual video processing with overlay param
     await message.answer(i18n.get("processing-text"))

@@ -22,7 +22,7 @@ class Config:
             logger.error("Missing required env variable: BOT_TOKEN")
             sys.exit(1)
 
-        self.BOT_TOKEN: str = os.getenv("BOT_TOKEN")
+        self.BOT_TOKEN: str = os.getenv("BOT_TOKEN")  # type: ignore[assignment]
 
 
 config = Config()
