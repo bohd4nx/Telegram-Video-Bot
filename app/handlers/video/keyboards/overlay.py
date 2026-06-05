@@ -7,10 +7,12 @@ def overlay_keyboard(android_text: str, ios_text: str) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=android_text,
+                    custom_emoji_id="5819078828017849357",
                     callback_data="overlay:android",
                 ),
                 InlineKeyboardButton(
                     text=ios_text,
+                    custom_emoji_id="5818920837645867167",
                     callback_data="overlay:ios",
                 ),
             ]

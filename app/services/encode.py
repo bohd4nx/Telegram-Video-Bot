@@ -9,10 +9,10 @@ logger = logging.getLogger(__name__)
 
 _VIDEO_OPTS: dict = dict(
     vcodec="libx264",
-    preset="veryfast",
-    crf=18,
+    preset="ultrafast",
+    crf=20,
     pix_fmt="yuv420p",
-    tune="fastdecode",
+    tune="zerolatency",
     movflags="+faststart",
     fpsmax=60,
     threads=0,
