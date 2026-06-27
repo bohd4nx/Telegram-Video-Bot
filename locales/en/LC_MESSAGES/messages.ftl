@@ -53,6 +53,10 @@ error-link-download =
     <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Couldn’t download the video.</b>
 
     <blockquote>The link may be private, expired, or from an unsupported platform. Try a different link.</blockquote>
+error-daily-limit =
+    <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Daily limit reached.</b>
+
+    <blockquote>You can download up to { $limit } videos via link per day. Come back tomorrow!</blockquote>
 
 error-processing =
     <tg-emoji emoji-id="5465665476971471368">❌</tg-emoji> <b>Something went wrong while processing your video.</b>

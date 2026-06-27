@@ -1,8 +1,10 @@
 [project]
-name = "video-bot"
-version = "2026.1.0"
-description = "Telegram bot that converts videos into round video messages"
+name = "round-video-bot"
+version = "2026.1.1"
+description = "Telegram bot that converts videos and social media links into round video notes"
+readme = "README.md"
 requires-python = ">=3.10"
+
 dependencies = [
     "aiogram[i18n]>=3.28.0",
     "aiogram_i18n>=1.4",

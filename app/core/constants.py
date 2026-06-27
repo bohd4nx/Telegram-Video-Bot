@@ -12,6 +12,12 @@ MAX_FILE_SIZE_MB = MAX_FILE_SIZE_BYTES / (1024 * 1024)
 SEGMENT_DURATION = 60.0  # seconds
 VIDEO_OUTPUT_SIZE = 640  # px (Telegram video_note requirement)
 
+# Minimum delay between consecutive yt-dlp downloads, to avoid provider rate-limits (e.g. Instagram)
+YT_DLP_MIN_INTERVAL = 3.0  # seconds
+
+# Maximum URL downloads allowed per user per day
+URL_DAILY_LIMIT = 10
+
 # Supported URL pattern for link processing
 URL_PATTERN = re.compile(
     r"https?://"

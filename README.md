@@ -1,11 +1,15 @@
 <div align="center">
+  <img src="" alt="round-video-bot" width="96" height="96" style="border-radius: 20px;"><br><br>
 
-# video-bot
+# round-video-bot
 
-Telegram bot that converts any video — or a TikTok / Instagram / YouTube Shorts link — into a **round video note** (video circle).
-Supports iOS and Android overlay styles, automatic segmentation of long videos, and PostgreSQL-backed download history.
+[![Stars](https://img.shields.io/github/stars/bohd4nx/Telegram-Video-Bot?style=flat&color=blue&label=Stars)](https://github.com/bohd4nx/Telegram-Video-Bot/stargazers)
+[![Forks](https://img.shields.io/github/forks/bohd4nx/Telegram-Video-Bot?style=flat&color=blue&label=Forks)](https://github.com/bohd4nx/Telegram-Video-Bot/forks)
+[![Telegram](https://img.shields.io/badge/demo-@RoundMsgBot-blue?style=flat&logo=telegram)](https://t.me/RoundMsgBot)
 
-**[Try Demo](https://t.me/RoundMsgBot)** · **[Report Bug](https://github.com/bohd4nx/Telegram-Video-Bot/issues)** · **[Request Feature](https://github.com/bohd4nx/Telegram-Video-Bot/issues)**
+Telegram bot that converts videos and social media links into **round video notes**.
+
+**[Try Demo](https://t.me/RoundMsgBot)** · **[Report Bug](https://github.com/bohd4nx/Telegram-Video-Bot/issues)**
 
 </div>
 
@@ -13,52 +17,36 @@ Supports iOS and Android overlay styles, automatic segmentation of long videos, 
 
 ## Features
 
-- **Circle conversion** — crops, masks, and scales any video to a perfect 640×640 round note
-- **Overlay styles** — iOS (white border) or Android (transparent) — user chooses per video
-- **URL downloads** — paste a TikTok, Instagram Reel, or YouTube Shorts link and get a circle
-- **Auto-segmentation** — videos longer than 60 s are split and sent as sequential notes
-- **i18n** — Russian and English, auto-detected from Telegram locale
-- **PostgreSQL** — stores users and download history
+- Converts any video file or TikTok / Instagram / YouTube Shorts link into a round note
+- iOS and Android overlay styles — user picks per video
+- Videos longer than 60 s are auto-split into sequential notes
+- Russian and English, auto-detected from Telegram locale
+- PostgreSQL-backed user and download history
 
 ---
 
 ## Quick Start
 
-### Docker (recommended)
+**Requires:** Python 3.10+, ffmpeg, PostgreSQL
 
 ```bash
 git clone https://github.com/bohd4nx/Telegram-Video-Bot.git
 cd Telegram-Video-Bot
 cp .env.example .env   # fill in BOT_TOKEN, POSTGRES_*
+```
+
+```bash
+# Docker (recommended)
 docker compose up -d
-```
 
-### Local
-
-```bash
-git clone https://github.com/bohd4nx/Telegram-Video-Bot.git
-cd Telegram-Video-Bot
-
-# requires Python 3.10+ and ffmpeg installed
+# or local
 pip install .
-
-cp .env.example .env   # fill in BOT_TOKEN, POSTGRES_*
 python main.py
-```
-
-**Install ffmpeg:**
-
-```bash
-brew install ffmpeg          # macOS
-sudo apt install ffmpeg      # Ubuntu/Debian
-choco install ffmpeg         # Windows
 ```
 
 ---
 
 ## Configuration
-
-Copy `.env.example` to `.env` and fill in the values:
 
 | Variable            | Required | Default | Description                                     |
 | ------------------- | -------- | ------- | ----------------------------------------------- |
@@ -66,38 +54,7 @@ Copy `.env.example` to `.env` and fill in the values:
 | `POSTGRES_USER`     | ✅       | —       | PostgreSQL username                             |
 | `POSTGRES_PASSWORD` | ✅       | —       | PostgreSQL password                             |
 | `POSTGRES_DB`       | ✅       | —       | PostgreSQL database name                        |
-| `POSTGRES_HOST`     | —        | `db`    | PostgreSQL host (Docker service name)           |
+| `POSTGRES_HOST`     | —        | `db`    | PostgreSQL host                                 |
 | `POSTGRES_PORT`     | —        | `5432`  | PostgreSQL port                                 |
 | `ADMIN_IDS`         | —        | —       | Comma-separated admin Telegram IDs              |
 | `SUPPORT_URL`       | —        | —       | Support link shown in /help                     |
-
----
-
-## Usage
-
-### Commands
-
-| Command  | Description     |
-| -------- | --------------- |
-| `/start` | Welcome message |
-| `/help`  | Usage guide     |
-
-### Sending a video
-
-1. Send any video file → bot asks for overlay style (iOS / Android)
-2. Choose overlay → bot processes and sends back round video note(s)
-
-### Sending a URL
-
-1. Paste a TikTok, Instagram Reel, or YouTube Shorts link
-2. Bot downloads and processes it the same way
-
----
-
-<div align="center">
-
-Made with ❤️ by [@bohd4nx](https://t.me/bohd4nx) · [Contributing](CONTRIBUTING.md)
-
-**Star ⭐ if you found it useful**
-
-</div>

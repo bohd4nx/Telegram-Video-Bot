@@ -1,6 +1,7 @@
 import logging
 
 from aiogram import Bot, F, Router
+from aiogram.exceptions import TelegramBadRequest
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
@@ -34,7 +35,15 @@ async def overlay_chosen(
 
     await callback.message.edit_text(i18n.get("processing"), reply_markup=None)
 
-    source = await download_tg_video(data["video_file_id"], bot)
+    try:
+        source = await download_tg_video(data["video_file_id"], bot)
+    except TelegramBadRequest as e:
+        if "file is too big" in str(e).lower():
+            size_mb = round(data["video_file_size"] / (1024 * 1024), 1)
+            await callback.message.edit_text(i18n.get("error-file-too-large", size=size_mb))
+            return
+        raise
+
     await process_and_send(
         source=source,
         chat_id=callback.message.chat.id,
